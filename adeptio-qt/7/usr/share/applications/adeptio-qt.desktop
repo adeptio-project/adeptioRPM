@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=2.0
+Name=Adeptio GUI Wallet
+Comment=Connect to the Adeptio P2P Network
+GenericName=Adeptio Wallet
+Keywords=Wallet;Adeptio;Coins
+Exec=adeptio-qt %u
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/usr/lib/tmp/adeptio.png
+MimeType=x-scheme-handler/adeptio;
+Categories=GNOME;GTK;Network;Finance;Qt;P2P
+StartupNotify=true

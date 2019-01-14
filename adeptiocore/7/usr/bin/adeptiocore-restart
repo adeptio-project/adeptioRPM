@@ -1,0 +1,17 @@
+#:: Adeptio dev team
+#:: Copyright // 2019-01-08
+#:: Version: v2.0.0.0
+
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+sudo systemctl restart adeptiocore
+if [ $? -ne "0" ]; then
+        echo "Unable to restart adeptiocore"
+else
+        echo ""
+        echo "adeptiocore successfully restarted"
+        echo ""
+fi
+
+echo -e "${GREEN}©2018-2019 powered by adeptio-project${NC}"

@@ -1,0 +1,14 @@
+#:: Adeptio dev team
+#:: Copyright // 2019-01-08
+#:: Version: v2.0.0.0
+
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+mn=$(curl -s curl https://api.adeptio.cc/api/v1/now?key=masternode_online | awk '{print $2}' | sed 's@,@@g')
+
+echo ""
+echo "Currently are: ~ $mn masternodes on the network"
+echo ""
+
+echo -e "${GREEN}©2018-2019 powered by adeptio-project${NC}"                                                                

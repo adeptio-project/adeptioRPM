@@ -1,0 +1,28 @@
+#:: Adeptio dev team
+#:: Copyright // 2019-01-08
+#:: Version: v2.0.0.0
+
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+explorer_block=$(curl -s https://explorer.adeptio.cc/api/getblockcount)
+node_block=$(adeptio-cli getinfo | grep block | grep -Eo '[+-]?[0-9]+([.][0-9]+)?')
+
+echo ""
+echo "Current network block: $explorer_block"
+echo "Your node block: $node_block"
+echo ""
+
+diff=$(echo "$explorer_block - $node_block" | bc)
+
+echo "Difference $diff"
+echo ""
+
+if [ "$diff" -eq 0 ]; then
+        echo "Blockchain is up-to-date"
+        echo ""
+else
+        echo "" > /dev/null
+fi
+
+echo -e "${GREEN}©2018-2019 powered by adeptio-project${NC}"

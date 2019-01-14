@@ -1,0 +1,17 @@
+#:: Adeptio dev team
+#:: Copyright // 2019-01-08
+#:: Version: v2.0.0.0
+
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+peers=$(adeptio-cli getpeerinfo | grep "\"addr\"")
+count=$(echo "$peers" | wc -l)
+
+echo ""
+echo "Your node connected to $count addreses:"
+echo ""
+echo "$peers"
+echo ""
+
+echo -e "${GREEN}©2018-2019 powered by adeptio-project${NC}"
