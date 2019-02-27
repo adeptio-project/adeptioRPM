@@ -1,0 +1,9 @@
+adeptio core (2.1.0.0) stable;
+
+Mandatory upgrade. PoS vulnerabilities fix, new features and enchantments.
+
+adeptio core (2.0.0.0) stable;
+
+Initial release. Configures everything for adeptio-qt
+
+-- adeptio-project <development@adeptio.cc>  Tue Jan  8 21:20:13 UTC 2019
