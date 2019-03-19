@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+#:: Adeptio dev team
+#:: Copyright // 2019-01-08
+#:: Version: v2.0.0.0
+
+set -e
+Intall_log='/var/log/syslog'
+
+echo 'Installing adeptiocore...'
+
+# Check if we have adeptiocore.service?
+test -e /etc/systemd/system/adeptiocore.service || echo 'Creating systemD service...'
+test -e /etc/systemd/system/adeptiocore.service || sudo cat << EOF > /etc/systemd/system/adeptiocore.service
+[Unit]
+Description=Adeptio Core Wallet daemon & service
+After=network.target
+[Service]
+User=$(echo $USER)
+Type=forking
+ExecStart=/usr/bin/adeptiod -daemon -pid=$(echo $HOME)/.adeptio/adeptiod.pid --datadir=$(echo $HOME)/.adeptio/
+PIDFile=$(echo $HOME)/.adeptio/adeptiod.pid
+ExecStop=/usr/bin/adeptio-cli stop
+Restart=always
+RestartSec=3600
+TimeoutStopSec=60s
+TimeoutStartSec=10s
+StartLimitInterval=120s
+StartLimitBurst=5
+[Install]
+WantedBy=default.target
+EOF
+
+sudo systemctl enable adeptiocore
+
+test -e /usr/lib/libdb_cxx-4.8.so || sudo ln -s /usr/lib/tmp/libdb_cxx-4.8.so /usr/lib/
+test -e /usr/share/doc/libdb4.8++/changelog.Debian.gz || sudo ln -s /usr/lib/tmp/share/doc/libdb4.8++ /usr/share/doc/
+
+# Change perm:
+sudo chmod 664 /etc/systemd/system/adeptiocore.service
+
+# Check if adeptio.conf is empty?
+mkdir -p ~/.adeptio/
+
+test -e $HOME/.adeptio/adeptio.conf || echo 'Configuring adeptiocore for the first time...'
+test -e $HOME/.adeptio/adeptio.conf || sudo cat << EOF > ~/.adeptio/adeptio.conf
+rpcuser=adeptiocoreuser
+rpcpassword=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo '')
+rpcallow=127.0.0.1
+server=1
+listen=1
+daemon=1
+staking=1
+enablezeromint=0
+EOF
+
+echo 'AdeptioCore successfully installed...'

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+#:: Adeptio dev team
+#:: Copyright // 2019-01-08
+#:: Version: v2.0.0.0
+
+set -e
+Intall_log='/var/log/syslog'
+
+echo 'Installing adeptio-qt...'
+
+test -e /usr/lib/libdb_cxx-4.8.so || echo 'Configuring adeptio-qt for the first time...'
+test -e /usr/lib/libdb_cxx-4.8.so || sudo ln -s /usr/lib/tmp/libdb_cxx-4.8.so /usr/lib/ 
+test -e /usr/share/doc/libdb4.8++/changelog.Debian.gz || sudo ln -s /usr/lib/tmp/share/doc/libdb4.8++ /usr/share/doc/
+
+echo 'adeptio-qt successfully installed...'

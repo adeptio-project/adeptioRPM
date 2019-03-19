@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+#:: Adeptio dev team
+#:: Copyright // 2019-01-08
+#:: Version: v2.0.0.0
+
+set -e
+
+# Remove binary's
+rm -fr /usr/bin/adeptio-qt
+
+# Remove libdb4.8
+test -L /usr/lib/libdb_cxx-4.8.so && rm /usr/lib/libdb_cxx-4.8.so
+test -L /usr/share/doc/libdb4.8++ && rm /usr/share/doc/libdb4.8++
+
+# Adeptio-qt icon
+rm /usr/lib/tmp/adeptio.png
+rm -fr /usr/lib/tmp/
+
